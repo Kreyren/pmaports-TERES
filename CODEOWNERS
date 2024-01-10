@@ -46,6 +46,7 @@ device/*/device-samsung-coreprimevelte/		@legolivesmatter @balejk
 device/*/linux-samsung-coreprimevelte/		@legolivesmatter @balejk
 device/*/linux-postmarketos-allwinner/		@Arnavion
 device/*/u-boot-pinephone/			@Arnavion
+device/*/*-olimex-teres_i		@Kreyren
 
 main/postmarketos-update-depthcharge-kernel/	@jenneron
 main/osk-sdl/					@craftyguy

@@ -1,0 +1,37 @@
+# Maintainer: Jacob Hrbek <kreyren@fsfe.org>
+
+pkgver=0.1
+pkgrel=0
+
+pkgdesc="OLIMEX Teres-I"
+pkgname=device-olimex-teres_i
+
+arch="aarch64"
+url="https://wiki.postmarketos.org/wiki/OLIMEX_Teres_i"
+license="EUPL"
+
+depends="
+	linux-postmarketos-allwinner>=5.14
+	mesa-egl
+	postmarketos-base
+	u-boot-olimex-teres_i
+	u-boot-tools
+	"
+makedepends="devicepkg-dev apk-tools"
+checkdepends=""
+
+source="deviceinfo"
+
+build() {
+	# shellcheck disable=SC2154 # startdir is pre-defined
+	devicepkg_build "$startdir" "$pkgname"
+}
+
+package() {
+	devicepkg_package "$startdir" $pkgname
+	# install -Dm644 "$srcdir"/hwtest.ini \
+	# 	"$pkgdir"/usr/share/hwtest.ini
+}
+sha512sums="
+9e6945cdd4a80f5e54c391f1d2c2134d6f8f2b2296595c6758dd8a1daf13cd297cf38ada529b2ccdf7eae049ecfe0782c53293736441f98010d027bde7a9cfd1  deviceinfo
+"

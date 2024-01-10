@@ -1,0 +1,45 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+
+	"settings": {
+		"editor.renderWhitespace": "all",
+		"terminal.integrated.scrollback": 5000,
+		"nix.enableLanguageServer": true,
+		"nix.serverPath": "nil",
+		"nix.serverSettings": {
+			// settings for 'nil' LSP
+			"nil": {
+				"formatting": {
+					"command": ["nixpkgs-fmt"]
+				}
+			}
+		},
+		"bracket-pair-colorizer-2.excludedLanguages": [
+			"nix" // Does weird and confusing coloring, seems not compatible
+		],
+		"terminal.integrated.env.linux": {
+			"EDITOR": "codium", // To open git things in codium
+		},
+	},
+	"extensions": {
+		"recommendations": [
+			"jnoortheen.nix-ide",
+			"oderwat.indent-rainbow",
+			"arrterian.nix-env-selector",
+			"medo64.render-crlf",
+			"aaron-bond.better-comments",
+			"mkhl.direnv",
+			"coenraads.bracket-pair-colorizer-2",
+			"editorconfig.editorconfig",
+			"vscodevim.vim",
+			"markwylde.vscode-filesize",
+			"plorefice.devicetree",
+			"foxundermoon.shell-format",
+			"timonwong.shellcheck"
+		]
+	}
+}

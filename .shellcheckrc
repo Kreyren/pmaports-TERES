@@ -1,0 +1,2 @@
+shell=sh # Busybox sh only
+disable=SC2034 # The variables in APKBUILD are not sourcable as they are processed by the apk's runtime

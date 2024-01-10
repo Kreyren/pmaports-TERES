@@ -1,0 +1,36 @@
+# Maintainer: Jacob Hrbek <kreyren@fsfe.org>
+
+# FIXME-QA(Krey): Implement tests
+# FIXME-SECURITY(Krey): Implement hardening
+
+pkgver=0.6
+pkgrel=1
+
+pkgname=crust-olimex-teres_i
+pkgdesc="SCP (power management) firmware for the OLIMEX Teres-I"
+arch="aarch64"
+url="https://github.com/crust-firmware/crust"
+license="BSD-1-Clause AND BSD-3-Clause AND GPL-2.0-only and MIT"
+
+makedepends="gcc-or1k-elf binutils-or1k-elf dtc bison flex"
+makedepends="$makedepends libstdc++-dev" # for ctype.h and sys/mman.h
+
+source="crust-v$pkgver.tar.gz::$url/archive/refs/tags/v$pkgver.tar.gz"
+options="!check !archcheck !tracedeps" # No tests
+
+builddir="crust-$pkgver"
+
+build() {
+	# cd "crust-$pkgver" || exit 1
+	make CROSS_COMPILE=or1k-elf- teres_i_defconfig
+	make CROSS_COMPILE=or1k-elf- build/scp/scp.bin
+}
+
+package() {
+	# shellcheck disable=SC2154 # Has a default value
+	install -D -m644 "src/crust-$pkgver/build/scp/scp.bin" "$pkgdir/usr/share/crust/olimex-teres_i/scp.bin"
+}
+
+sha512sums="
+4788e44e2b9bf37ddc073df6511cff20ecb682f0650bc42fedee01d1ea324d45722b7d16231566ab58d6788d5cc8a3d28beb9130a845d1871995ca22b5ef7df8  crust-v0.6.tar.gz
+"

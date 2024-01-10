@@ -104,7 +104,7 @@ ENV/
 # mypy
 .mypy_cache/
 
-# Visual Studio Code
+# Ignore local changes to vscode/vscodium so that developers can adjust their environment to their liking
 .vscode/
 
 # Pytest
@@ -118,3 +118,6 @@ ENV/
 
 # Allow having untracked packages in aports using a custom-something directory
 /custom-*/
+
+# Ignore direnv
+.direnv

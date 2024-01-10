@@ -1,14 +1,53 @@
-; This file is for unifying the coding style for different editors and IDEs.
-; Plugins are available for notepad++, emacs, vim, gedit,
-; textmate, visual studio, and more.
-;
-; See http://editorconfig.org for details.
+# EditorConfig configuration for this repository -- https://EditorConfig.org
 
-# Top-most EditorConfig file.
+# Top-most EditorConfig file
 root = true
 
-[{**.{md,ini,sh,rules,nft},**/APKBUILD}]
-indent_style = tab
+# Unix-style newlines with a newline ending every file, utf-8 charset
+[*]
 end_of_line = lf
-trim_trailing_whitespace = true
 insert_final_newline = true
+trim_trailing_whitespace = true
+charset = utf-8
+
+# Ignore diffs/patches
+[*.{diff,patch}]
+end_of_line = unset
+insert_final_newline = unset
+trim_trailing_whitespace = unset
+
+# Prefer space-indent for..
+[*.{json,lock,md,pl,pm,py,rb,xml}]
+indent_style = space
+
+# Prefer tab-indent for..
+[*.{nix,sh,bash}]
+indent_style = tab
+
+[*.{json,lock,md,nix,rb,sh}]
+indent_size = 2
+
+[*.lock]
+indent_size = unset
+
+[*.md]
+trim_trailing_whitespace = true
+
+# binaries
+[*.nib]
+end_of_line = unset
+insert_final_newline = unset
+trim_trailing_whitespace = unset
+charset = unset
+
+[eggs.nix]
+trim_trailing_whitespace = unset
+
+# You can add file-specific configuration using:
+#
+# [path/to/file]
+# end_of_line = unset
+# indent_style = unset
+# insert_final_newline = unset
+# trim_trailing_whitespace = unset
+# other config..
