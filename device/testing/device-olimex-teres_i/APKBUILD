@@ -1,37 +1,43 @@
 # Maintainer: Jacob Hrbek <kreyren@fsfe.org>
 
-pkgver=0.1
-pkgrel=0
+# Credit: Milan P. Stanić for maintaining the device on Alpine Linux including u-boot, arm-trusted-firmware, crust and finding a solution to broken display when compiled on alpine.
+
+# FIXME(Krey): Implement EFI
+
+# shellcheck disable=SC2154 # pre-defined values
+: "$srcdir" "$pkgdir" "$startdir"
 
 pkgdesc="OLIMEX Teres-I"
-pkgname=device-olimex-teres_i
+pkgname="device-olimex-teres_i"
+pkgver=1.0
+pkgrel=0
 
 arch="aarch64"
 url="https://wiki.postmarketos.org/wiki/OLIMEX_Teres_i"
 license="EUPL"
 
+# FIXME(Krey): the rtl8723bs linux driver should be enough for wifi and BLE, figure out why that doesn't work without the `linux-firmware-rtlwifi`
 depends="
 	linux-postmarketos-allwinner>=5.14
 	mesa-egl
 	postmarketos-base
-	u-boot-olimex-teres_i
-	u-boot-tools
+	linux-firmware-rtlwifi
+	u-boot-sunxi
 	"
-makedepends="devicepkg-dev apk-tools"
-checkdepends=""
+makedepends="devicepkg-dev"
 
-source="deviceinfo"
+source="./deviceinfo"
+
+options="!check" # We don't have any tests to run
 
 build() {
-	# shellcheck disable=SC2154 # startdir is pre-defined
 	devicepkg_build "$startdir" "$pkgname"
 }
 
 package() {
 	devicepkg_package "$startdir" $pkgname
-	# install -Dm644 "$srcdir"/hwtest.ini \
-	# 	"$pkgdir"/usr/share/hwtest.ini
 }
+
 sha512sums="
-9e6945cdd4a80f5e54c391f1d2c2134d6f8f2b2296595c6758dd8a1daf13cd297cf38ada529b2ccdf7eae049ecfe0782c53293736441f98010d027bde7a9cfd1  deviceinfo
+15ef26ba5eb8eff9d81921b96778eec8870f41156f62caa296575e5c01ce2f18342bee410b370a12ca52ea9eb4ecded50dac30945f3e9bd3407135a3d458d43c  deviceinfo
 "

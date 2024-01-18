@@ -1,0 +1,713 @@
+    $  lsmod
+    Module                  Size  Used by
+    r8723bs               532480  0
+    axp20x_adc             16384  0
+    cfg80211              978944  1 r8723bs
+    pinctrl_axp209         12288  0
+    CRYPTO THING - crct10dif_ce           12288  1
+    axp20x_ac_power        12288  0
+    CRYPTO THING - polyval_ce             12288  0
+    analogix_anx6345       16384  0
+    axp20x_battery         12288  0
+    axp20x_pek             12288  0
+    CRYPTO THING - polyval_generic        12288  1 polyval_ce
+    analogix_dp            49152  1 analogix_anx6345
+    DUNNO - sun8i_di               20480  0
+    sun8i_rotate           24576  0
+    CRYPTO THING - sm4                    12288  0
+    drm_display_helper    167936  2 analogix_anx6345,analogix_dp
+    WEBCAM? - uvcvideo              118784  0
+    snd_soc_simple_card    20480  0
+    v4l2_mem2mem           40960  2 sun8i_rotate,sun8i_di
+    snd_soc_simple_card_utils    32768  1 snd_soc_simple_card
+    videobuf2_dma_contig    24576  2 sun8i_rotate,sun8i_di
+    WEBCAM? - uvc                    12288  1 uvcvideo
+    lima                   69632  3
+    videobuf2_vmalloc      16384  1 uvcvideo
+    videobuf2_memops       16384  2 videobuf2_vmalloc,videobuf2_dma_contig
+    videobuf2_v4l2         32768  4 sun8i_rotate,sun8i_di,uvcvideo,v4l2_mem2mem
+    sun50i_codec_analog    36864  1
+    sun8i_adda_pr_regmap    12288  1 sun50i_codec_analog
+    ??? videodev              311296  5 sun8i_rotate,videobuf2_v4l2,sun8i_di,uvcvideo,v4l2_mem2mem
+    ??? videobuf2_common       69632  8 sun8i_rotate,videobuf2_vmalloc,videobuf2_dma_contig,videobuf2_v4l2,sun8i_di,uvcvideo,v4l2_mem2mem,videobuf2_memops
+    gpu_sched              53248  1 lima
+    sun8i_a33_mbus         16384  0
+    pulse width modulation - pwm_sun4i              12288  1
+    sun8i_codec            53248  1
+    drm_shmem_helper       24576  1 lima
+    SOUND? - sun4i_i2s              24576  2
+    rfkill                 36864  3 cfg80211
+    ??? - sunxi_wdt              12288  0
+    ??? - mc                     81920  5 videodev,videobuf2_v4l2,uvcvideo,videobuf2_common,v4l2_mem2mem
+    ??? sound? - libarc4                12288  1 r8723bs
+    crypto thing - sun8i_ce               36864  0
+    onboard_usb_hub        12288  0
+    sun4i_drm              16384  3
+    crypto_engine          20480  1 sun8i_ce
+    snd_soc_simple_amplifier    12288  1
+    sun4i_tcon             36864  1 sun4i_drm
+    sun6i_dma              36864  2
+    sun8i_mixer            40960  0
+    sun8i_tcon_top         12288  2 sun4i_tcon,sun4i_drm
+    drm_dma_helper         20480  4 sun8i_mixer,sun4i_drm
+    drm_kms_helper        217088  7 sun8i_mixer,drm_dma_helper,sun4i_tcon,drm_display_helper,sun4i_drm,analogix_anx6345,analogix_dp
+    pwm_bl                 16384  0
+    mousedev               20480  0
+    uio_pdrv_genirq        16384  0
+    uio                    20480  1 uio_pdrv_genirq
+    xt_conntrack           12288  2
+    nf_conntrack          172032  1 xt_conntrack
+    nf_defrag_ipv6         24576  1 nf_conntrack
+    nf_defrag_ipv4         12288  1 nf_conntrack
+    ip6t_rpfilter          12288  1
+    ipt_rpfilter           12288  1
+    xt_pkttype             12288  2
+    xt_LOG                 16384  2
+    nf_log_syslog          20480  2
+    xt_tcpudp              16384  3
+    nft_compat             16384  11
+    sch_fq_codel           20480  5
+    nf_tables             270336  113 nft_compat
+    libcrc32c              12288  2 nf_conntrack,nf_tables
+    nfnetlink              20480  2 nft_compat,nf_tables
+    ctr                    12288  0
+    tap                    28672  0
+    macvlan                28672  0
+    bridge                294912  0
+    stp                    12288  1 bridge
+    llc                    16384  2 bridge,stp
+    fuse                  151552  3
+    drm                   638976  17 gpu_sched,sun8i_mixer,drm_kms_helper,drm_dma_helper,lima,drm_shmem_helper,sun4i_tcon,drm_display_helper,sun4i_drm,analogix_anx6345,analogix_dp
+    ip_tables              28672  0
+    x_tables               45056  8 xt_conntrack,ip6t_rpfilter,nft_compat,xt_LOG,xt_tcpudp,ipt_rpfilter,xt_pkttype,ip_tables
+    dm_mod                151552  0
+    dax                    45056  1 dm_mod
+    ​
+    # dmesg
+    [    0.000000] Booting Linux on physical CPU 0x0000000000 [0x410fd034]
+    [    0.000000] Linux version 6.4.11-hardened1 (nixbld@localhost) (gcc (GCC) 12.2.0, GNU ld (GNU Binutils) 2.40) #1-NixOS SMP Wed Aug 16 16:32:31 UTC 2023
+    [    0.000000] Machine model: Olimex A64 Teres-I
+    [    0.000000] efi: UEFI not found.
+    [    0.000000] NUMA: No NUMA configuration found
+    [    0.000000] NUMA: Faking a node at [mem 0x0000000040000000-0x00000000bdffffff]
+    [    0.000000] NUMA: NODE_DATA [mem 0xbd9d9900-0xbd9dcfff]
+    [    0.000000] Zone ranges:
+    [    0.000000]   DMA      [mem 0x0000000040000000-0x00000000bdffffff]
+    [    0.000000]   DMA32    empty
+    [    0.000000]   Normal   empty
+    [    0.000000]   Device   empty
+    [    0.000000] Movable zone start for each node
+    [    0.000000] Early memory node ranges
+    [    0.000000]   node   0: [mem 0x0000000040000000-0x00000000bdffffff]
+    [    0.000000] Initmem setup node 0 [mem 0x0000000040000000-0x00000000bdffffff]
+    [    0.000000] On node 0, zone DMA: 8192 pages in unavailable ranges
+    [    0.000000] cma: Reserved 32 MiB at 0x00000000b9800000
+    [    0.000000] psci: probing for conduit method from DT.
+    [    0.000000] psci: PSCIv1.1 detected in firmware.
+    [    0.000000] psci: Using standard PSCI v0.2 function IDs
+    [    0.000000] psci: MIGRATE_INFO_TYPE not supported.
+    [    0.000000] psci: SMC Calling Convention v1.2
+    [    0.000000] percpu: Embedded 31 pages/cpu s89448 r8192 d29336 u126976
+    [    0.000000] pcpu-alloc: s89448 r8192 d29336 u126976 alloc=31*4096
+    [    0.000000] pcpu-alloc: [0] 0 [0] 1 [0] 2 [0] 3
+    [    0.000000] Detected VIPT I-cache on CPU0
+    [    0.000000] CPU features: detected: ARM erratum 843419
+    [    0.000000] CPU features: detected: ARM erratum 845719
+    [    0.000000] alternatives: applying boot alternatives
+    [    0.000000] Kernel command line: init=/nix/store/sq3qfk3hsxpjcgnbvf7adx2vlzgppdjc-nixos-system-tsvetan-23.05.20230829.2ab91c8/init console=ttyS0,115200n8 loglevel=4
+    [    0.000000] Dentry cache hash table entries: 262144 (order: 9, 2097152 bytes, linear)
+    [    0.000000] Inode-cache hash table entries: 131072 (order: 8, 1048576 bytes, linear)
+    [    0.000000] Fallback order for Node 0: 0
+    [    0.000000] Built 1 zonelists, mobility grouping on.  Total pages: 508032
+    [    0.000000] Policy zone: DMA
+    [    0.000000] mem auto-init: stack:all(zero), heap alloc:off, heap free:off
+    [    0.000000] Memory: 1923764K/2064384K available (22464K kernel code, 5794K rwdata, 12464K rodata, 13760K init, 1055K bss, 107852K reserved, 32768K cma-reserved)
+    [    0.000000] SLUB: HWalign=64, Order=0-3, MinObjects=0, CPUs=4, Nodes=1
+    [    0.000000] ftrace: allocating 68225 entries in 267 pages
+    [    0.000000] ftrace: allocated 267 pages with 4 groups
+    [    0.000000] trace event string verifier disabled
+    [    0.000000] rcu: Hierarchical RCU implementation.
+    [    0.000000] rcu: 	RCU event tracing is enabled.
+    [    0.000000] rcu: 	RCU restricting CPUs from NR_CPUS=384 to nr_cpu_ids=4.
+    [    0.000000] 	Rude variant of Tasks RCU enabled.
+    [    0.000000] 	Tracing variant of Tasks RCU enabled.
+    [    0.000000] rcu: RCU calculated value of scheduler-enlistment delay is 25 jiffies.
+    [    0.000000] rcu: Adjusting geometry for rcu_fanout_leaf=16, nr_cpu_ids=4
+    [    0.000000] NR_IRQS: 64, nr_irqs: 64, preallocated irqs: 0
+    [    0.000000] Root IRQ handler: gic_handle_irq
+    [    0.000000] GIC: Using split EOI/Deactivate mode
+    [    0.000000] rcu: srcu_init: Setting srcu_struct sizes based on contention.
+    [    0.000000] arch_timer: Enabling global workaround for Allwinner erratum UNKNOWN1
+    [    0.000000] arch_timer: CPU0: Trapping CNTVCT access
+    [    0.000000] arch_timer: cp15 timer(s) running at 24.00MHz (phys).
+    [    0.000000] clocksource: arch_sys_counter: mask: 0xffffffffffffff max_cycles: 0x588fe9dc0, max_idle_ns: 440795202592 ns
+    [    0.000001] sched_clock: 56 bits at 24MHz, resolution 41ns, wraps every 4398046511097ns
+    [    0.000786] clocksource: timer: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 79635851949 ns
+    [    0.002271] kfence: initialized - using 2097152 bytes for 255 objects at 0x(____ptrval____)-0x(____ptrval____)
+    [    0.002593] Console: colour dummy device 80x25
+    [    0.002823] Calibrating delay loop (skipped), value calculated using timer frequency.. 48.00 BogoMIPS (lpj=96000)
+    [    0.002840] pid_max: default: 32768 minimum: 301
+    [    0.003638] LSM: initializing lsm=capability,landlock,yama,safesetid,selinux,bpf,integrity
+    [    0.003821] landlock: Up and running.
+    [    0.003825] Yama: becoming mindful.
+    [    0.003851] SELinux:  Initializing.
+    [    0.004465] LSM support for eBPF active
+    [    0.004912] Mount-cache hash table entries: 4096 (order: 3, 32768 bytes, linear)
+    [    0.004938] Mountpoint-cache hash table entries: 4096 (order: 3, 32768 bytes, linear)
+    [    0.007521] cacheinfo: Unable to detect cache hierarchy for CPU 0
+    [    0.009016] cblist_init_generic: Setting adjustable number of callback queues.
+    [    0.009025] cblist_init_generic: Setting shift to 2 and lim to 1.
+    [    0.009173] cblist_init_generic: Setting adjustable number of callback queues.
+    [    0.009179] cblist_init_generic: Setting shift to 2 and lim to 1.
+    [    0.009505] rcu: Hierarchical SRCU implementation.
+    [    0.009510] rcu: 	Max phase no-delay instances is 1000.
+    [    0.016432] EFI services will not be available.
+    [    0.017000] smp: Bringing up secondary CPUs ...
+    [    0.019432] Detected VIPT I-cache on CPU1
+    [    0.019522] arch_timer: CPU1: Trapping CNTVCT access
+    [    0.019543] CPU1: Booted secondary processor 0x0000000001 [0x410fd034]
+    [    0.021243] Detected VIPT I-cache on CPU2
+    [    0.021310] arch_timer: CPU2: Trapping CNTVCT access
+    [    0.021325] CPU2: Booted secondary processor 0x0000000002 [0x410fd034]
+    [    0.022682] Detected VIPT I-cache on CPU3
+    [    0.022738] arch_timer: CPU3: Trapping CNTVCT access
+    [    0.022751] CPU3: Booted secondary processor 0x0000000003 [0x410fd034]
+    [    0.022863] smp: Brought up 1 node, 4 CPUs
+    [    0.022872] SMP: Total of 4 processors activated.
+    [    0.022878] CPU features: detected: 32-bit EL0 Support
+    [    0.022882] CPU features: detected: 32-bit EL1 Support
+    [    0.022889] CPU features: detected: CRC32 instructions
+    [    0.023001] CPU features: emulated: Privileged Access Never (PAN) using TTBR0_EL1 switching
+    [    0.023012] CPU: All CPU(s) started at EL2
+    [    0.023043] alternatives: applying system-wide alternatives
+    [    0.028056] devtmpfs: initialized
+    [    0.044589] clocksource: jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 7645041785100000 ns
+    [    0.044628] futex hash table entries: 1024 (order: 4, 65536 bytes, linear)
+    [    0.046444] pinctrl core: initialized pinctrl subsystem
+    [    0.046462] pinctrl core: failed to create debugfs directory
+    [    0.049780] DMI not present or invalid.
+    [    0.055822] NET: Registered PF_NETLINK/PF_ROUTE protocol family
+    [    0.057435] DMA: preallocated 256 KiB GFP_KERNEL pool for atomic allocations
+    [    0.057608] DMA: preallocated 256 KiB GFP_KERNEL|GFP_DMA pool for atomic allocations
+    [    0.057831] DMA: preallocated 256 KiB GFP_KERNEL|GFP_DMA32 pool for atomic allocations
+    [    0.057912] audit: initializing netlink subsys (disabled)
+    [    0.058284] audit: type=2000 audit(0.056:1): state=initialized audit_enabled=0 res=1
+    [    0.060481] thermal_sys: Registered thermal governor 'step_wise'
+    [    0.060490] thermal_sys: Registered thermal governor 'power_allocator'
+    [    0.060600] cpuidle: using governor ladder
+    [    0.060629] cpuidle: using governor menu
+    [    0.061061] hw-breakpoint: found 6 breakpoint and 4 watchpoint registers.
+    [    0.061229] ASID allocator initialised with 65536 entries
+    [    0.065013] Serial: AMBA PL011 UART driver
+    [    0.095244] KASLR disabled due to lack of seed
+    [    0.096913] HugeTLB: registered 1.00 GiB page size, pre-allocated 0 pages
+    [    0.096927] HugeTLB: 0 KiB vmemmap can be freed for a 1.00 GiB page
+    [    0.096935] HugeTLB: registered 32.0 MiB page size, pre-allocated 0 pages
+    [    0.096940] HugeTLB: 0 KiB vmemmap can be freed for a 32.0 MiB page
+    [    0.096947] HugeTLB: registered 2.00 MiB page size, pre-allocated 0 pages
+    [    0.096952] HugeTLB: 0 KiB vmemmap can be freed for a 2.00 MiB page
+    [    0.096958] HugeTLB: registered 64.0 KiB page size, pre-allocated 0 pages
+    [    0.096962] HugeTLB: 0 KiB vmemmap can be freed for a 64.0 KiB page
+    [    1.248347] ACPI: Interpreter disabled.
+    [    1.251852] iommu: Default domain type: Translated
+    [    1.251866] iommu: DMA domain TLB invalidation policy: strict mode
+    [    1.252695] SCSI subsystem initialized
+    [    1.252953] libata version 3.00 loaded.
+    [    1.253285] usbcore: registered new interface driver usbfs
+    [    1.253329] usbcore: registered new interface driver hub
+    [    1.253392] usbcore: registered new device driver usb
+    [    1.254890] pps_core: LinuxPPS API ver. 1 registered
+    [    1.254897] pps_core: Software ver. 5.3.6 - Copyright 2005-2007 Rodolfo Giometti <giometti@linux.it>
+    [    1.254920] PTP clock support registered
+    [    1.255118] EDAC MC: Ver: 3.0.0
+    [    1.256280] scmi_core: SCMI protocol bus registered
+    [    1.257347] FPGA manager framework
+    [    1.257519] Advanced Linux Sound Architecture Driver Initialized.
+    [    1.259585] vgaarb: loaded
+    [    1.283332] clocksource: Switched to clocksource arch_sys_counter
+    [    1.284570] VFS: Disk quotas dquot_6.6.0
+    [    1.284661] VFS: Dquot-cache hash table entries: 512 (order 0, 4096 bytes)
+    [    1.285159] pnp: PnP ACPI: disabled
+    [    1.298871] NET: Registered PF_INET protocol family
+    [    1.299216] IP idents hash table entries: 32768 (order: 6, 262144 bytes, linear)
+    [    1.302566] tcp_listen_portaddr_hash hash table entries: 1024 (order: 2, 16384 bytes, linear)
+    [    1.302630] Table-perturb hash table entries: 65536 (order: 6, 262144 bytes, linear)
+    [    1.302754] TCP established hash table entries: 16384 (order: 5, 131072 bytes, linear)
+    [    1.302940] TCP bind hash table entries: 16384 (order: 7, 524288 bytes, linear)
+    [    1.303766] TCP: Hash tables configured (established 16384 bind 16384)
+    [    1.304304] MPTCP token hash table entries: 2048 (order: 3, 49152 bytes, linear)
+    [    1.304521] UDP hash table entries: 1024 (order: 3, 32768 bytes, linear)
+    [    1.304587] UDP-Lite hash table entries: 1024 (order: 3, 32768 bytes, linear)
+    [    1.305024] NET: Registered PF_UNIX/PF_LOCAL protocol family
+    [    1.305990] RPC: Registered named UNIX socket transport module.
+    [    1.306000] RPC: Registered udp transport module.
+    [    1.306004] RPC: Registered tcp transport module.
+    [    1.306008] RPC: Registered tcp NFSv4.1 backchannel transport module.
+    [    1.306022] NET: Registered PF_XDP protocol family
+    [    1.306052] PCI: CLS 0 bytes, default 64
+    [    1.306488] Trying to unpack rootfs image as initramfs...
+    [    1.316644] kvm [1]: IPA Size Limit: 40 bits
+    [    1.321004] kvm [1]: vgic interrupt IRQ9
+    [    1.321070] kvm [1]: Hyp mode initialized successfully
+    [    1.324391] Initialise system trusted keyrings
+    [    1.324951] workingset: timestamp_bits=42 max_order=19 bucket_order=0
+    [    1.325044] zbud: loaded
+    [    1.327516] squashfs: version 4.0 (2009/01/31) Phillip Lougher
+    [    1.329071] NFS: Registering the id_resolver key type
+    [    1.329180] Key type id_resolver registered
+    [    1.329185] Key type id_legacy registered
+    [    1.329259] nfs4filelayout_init: NFSv4 File Layout Driver Registering...
+    [    1.329270] nfs4flexfilelayout_init: NFSv4 Flexfile Layout Driver Registering...
+    [    1.329692] 9p: Installing v9fs 9p2000 file system support
+    [    1.383262] Key type asymmetric registered
+    [    1.383287] Asymmetric key parser 'x509' registered
+    [    1.383570] Block layer SCSI generic (bsg) driver version 0.4 loaded (major 245)
+    [    1.384039] io scheduler mq-deadline registered
+    [    1.384049] io scheduler kyber registered
+    [    1.406757] EINJ: ACPI disabled.
+    [    1.455228] Serial: 8250/16550 driver, 4 ports, IRQ sharing enabled
+    [    1.461904] SuperH (H)SCI(F) driver initialized
+    [    1.462964] msm_serial: driver initialized
+    [    1.481839] loop: module loaded
+    [    1.484952] megasas: 07.725.01.00-rc1
+    [    1.498885] tun: Universal TUN/TAP device driver, 1.6
+    [    1.501276] thunder_xcv, ver 1.0
+    [    1.501344] thunder_bgx, ver 1.0
+    [    1.501405] nicpf, ver 1.0
+    [    1.504424] hns3: Hisilicon Ethernet Network Driver for Hip08 Family - version
+    [    1.504443] hns3: Copyright (c) 2017 Huawei Corporation.
+    [    1.504496] hclge is initializing
+    [    1.504533] e1000: Intel(R) PRO/1000 Network Driver
+    [    1.504538] e1000: Copyright (c) 1999-2006 Intel Corporation.
+    [    1.504609] e1000e: Intel(R) PRO/1000 Network Driver
+    [    1.504613] e1000e: Copyright(c) 1999 - 2015 Intel Corporation.
+    [    1.504652] igb: Intel(R) Gigabit Ethernet Network Driver
+    [    1.504657] igb: Copyright (c) 2007-2014 Intel Corporation.
+    [    1.504716] igbvf: Intel(R) Gigabit Virtual Function Network Driver
+    [    1.504722] igbvf: Copyright (c) 2009 - 2012 Intel Corporation.
+    [    1.505741] sky2: driver version 1.30
+    [    1.514916] usbcore: registered new interface driver usb-storage
+    [    1.523978] sun6i-rtc 1f00000.rtc: registered as rtc0
+    [    1.524031] sun6i-rtc 1f00000.rtc: setting system clock to 2024-01-10T22:18:04 UTC (1704925084)
+    [    1.524232] sun6i-rtc 1f00000.rtc: RTC enabled
+    [    1.525277] i2c_dev: i2c /dev entries driver
+    [    1.545136] sdhci: Secure Digital Host Controller Interface driver
+    [    1.545154] sdhci: Copyright(c) Pierre Ossman
+    [    1.547508] Synopsys Designware Multimedia Card Interface Driver
+    [    1.550386] sdhci-pltfm: SDHCI platform and OF driver helper
+    [    1.555972] ledtrig-cpu: registered to indicate activity on CPUs
+    [    1.560876] SMCCC: SOC_ID: ID = jep106:091e:1689 Revision = 0x00000001
+    [    1.562571] hid: raw HID events driver (C) Jiri Kosina
+    [    1.563379] usbcore: registered new interface driver usbhid
+    [    1.563388] usbhid: USB HID core driver
+    [    1.572918] hw perfevents: enabled with armv8_cortex_a53 PMU driver, 7 counters available
+    [    1.587121] drop_monitor: Initializing network drop monitor service
+    [    1.587909] NET: Registered PF_INET6 protocol family
+    [    1.927551] Freeing initrd memory: 9428K
+    [    1.930249] Segment Routing with IPv6
+    [    1.930352] In-situ OAM (IOAM) with IPv6
+    [    1.930526] NET: Registered PF_PACKET protocol family
+    [    1.930877] 9pnet: Installing 9P2000 support
+    [    1.931022] Key type dns_resolver registered
+    [    1.931114] start plist test
+    [    1.937969] end plist test
+    [    1.956083] registered taskstats version 1
+    [    1.956450] Loading compiled-in X.509 certificates
+    [    1.978311] Key type .fscrypt registered
+    [    1.978331] Key type fscrypt-provisioning registered
+    [    1.989475] platform 1100000.mixer: Fixed dependency cycle(s) with /soc/lcd-controller@1c0d000/ports/port@0/endpoint@0
+    [    1.989570] platform 1100000.mixer: Fixed dependency cycle(s) with /soc/lcd-controller@1c0c000/ports/port@0/endpoint@0
+    [    1.993140] platform 1200000.mixer: Fixed dependency cycle(s) with /soc/lcd-controller@1c0d000/ports/port@0/endpoint@1
+    [    1.993215] platform 1200000.mixer: Fixed dependency cycle(s) with /soc/lcd-controller@1c0c000/ports/port@0/endpoint@1
+    [    1.999760] pinctrl core: failed to create debugfs directory for 1f02c00.pinctrl
+    [    1.999811] gpio gpiochip0: Static allocation of GPIO base is deprecated, use dynamic allocation.
+    [    2.001796] sun50i-a64-r-pinctrl 1f02c00.pinctrl: initialized sunXi PIO driver
+    [    2.017781] thermal_sys: Failed to find 'trips' node
+    [    2.017797] thermal_sys: Failed to find trip points for thermal-sensor id=1
+    [    2.017814] sun8i-thermal: probe of 1c25000.thermal-sensor failed with error -22
+    [    2.022768] sun50i-a64-r-pinctrl 1f02c00.pinctrl: supply vcc-pl not found, using dummy regulator
+    [    2.040433] sunxi-rsb 1f03400.rsb: RSB running at 4000000 Hz
+    [    2.040879] axp20x-rsb sunxi-rsb-3a3: AXP20x variant AXP803 found
+    [    2.060033] axp20x-rsb sunxi-rsb-3a3: AXP20X driver loaded
+    [    2.065201] vcc-pl: Bringing 1800000uV into 3300000-3300000uV
+    [    2.065223] pinctrl core: failed to create debugfs directory for 1c20800.pinctrl
+    [    2.065268] gpio gpiochip1: Static allocation of GPIO base is deprecated, use dynamic allocation.
+    [    2.068480] vcc-dvdd-csi: Bringing 700000uV into 1800000-1800000uV
+    [    2.071177] sun50i-a64-pinctrl 1c20800.pinctrl: initialized sunXi PIO driver
+    [    2.073837] simple-framebuffer be000000.framebuffer: framebuffer at 0xbe000000, 0x400800 bytes
+    [    2.073859] simple-framebuffer be000000.framebuffer: format=x8r8g8b8, mode=1366x768x32, linelength=5464
+    [    2.074176] fbcon: Deferring console take-over
+    [    2.074184] simple-framebuffer be000000.framebuffer: fb0: simplefb registered!
+    [    2.076390] sun50i-a64-pinctrl 1c20800.pinctrl: supply vcc-pb not found, using dummy regulator
+    [    2.077262] printk: console [ttyS0] disabled
+    [    2.097476] 1c28000.serial: ttyS0 at MMIO 0x1c28000 (irq = 191, base_baud = 1500000) is a U6_16550A
+    [    2.097553] printk: console [ttyS0] enabled
+    [    2.117381] ehci-platform 1c1b000.usb: EHCI Host Controller
+    [    2.117442] ehci-platform 1c1b000.usb: new USB bus registered, assigned bus number 1
+    [    2.117649] ehci-platform 1c1b000.usb: irq 192, io mem 0x01c1b000
+    [    2.120567] sun50i-a64-pinctrl 1c20800.pinctrl: supply vcc-ph not found, using dummy regulator
+    [    2.120845] ohci-platform 1c1b400.usb: Generic Platform OHCI controller
+    [    2.120879] ohci-platform 1c1b400.usb: new USB bus registered, assigned bus number 2
+    [    2.120982] ohci-platform 1c1b400.usb: irq 193, io mem 0x01c1b400
+    [    2.121832] i2c 0-0038: Fixed dependency cycle(s) with /soc/lcd-controller@1c0c000/ports/port@1/endpoint@0
+    [    2.131418] ehci-platform 1c1b000.usb: USB 2.0 started, EHCI 1.00
+    [    2.132504] hub 1-0:1.0: USB hub found
+    [    2.132572] hub 1-0:1.0: 1 port detected
+    [    2.135866] sunxi-mmc 1c0f000.mmc: Got CD GPIO
+    [    2.138843] sunxi-mmc 1c10000.mmc: allocated mmc-pwrseq
+    [    2.142034] input: gpio-keys as /devices/platform/gpio-keys/input/input0
+    [    2.143053] clk: Disabling unused clocks
+    [    2.143236] ALSA device list:
+    [    2.143246]   No soundcards found.
+    [    2.159925] sunxi-mmc 1c0f000.mmc: initialized, max. request size: 16384 KB, uses new timings mode
+    [    2.163328] sunxi-mmc 1c10000.mmc: initialized, max. request size: 16384 KB, uses new timings mode
+    [    2.166849] sunxi-mmc 1c11000.mmc: initialized, max. request size: 2048 KB, uses new timings mode
+    [    2.181041] mmc1: new high speed SDIO card at address 0001
+    [    2.184105] hub 2-0:1.0: USB hub found
+    [    2.184155] hub 2-0:1.0: 1 port detected
+    [    2.199370] mmc0: new high speed SDXC card at address aaaa
+    [    2.201279] Freeing unused kernel memory: 13760K
+    [    2.201672] mmcblk0: mmc0:aaaa SN128 119 GiB
+    [    2.204413]  mmcblk0: p1 p2 p3
+    [    2.238468] Checked W+X mappings: passed, no W+X pages found
+    [    2.238565] Run /init as init process
+    [    2.238573]   with arguments:
+    [    2.238580]     /init
+    [    2.238585]   with environment:
+    [    2.238589]     HOME=/
+    [    2.238594]     TERM=linux
+    [    2.407418] usb 1-1: new high-speed USB device number 2 using ehci-platform
+    [    2.435610] stage-1-init: [Wed Jan 10 22:18:05 UTC 2024] loading module dm_mod...
+    [    2.465194] device-mapper: ioctl: 4.48.0-ioctl (2023-03-01) initialised: dm-devel@redhat.com
+    [    2.473047] stage-1-init: [Wed Jan 10 22:18:05 UTC 2024] running udev...
+    [    2.554305] stage-1-init: [Wed Jan 10 22:18:05 UTC 2024] Starting systemd-udevd version 253.6
+    [    2.570477] hub 1-1:1.0: USB hub found
+    [    2.570863] hub 1-1:1.0: 4 ports detected
+    [    2.859348] usb 1-1.3: new high-speed USB device number 3 using ehci-platform
+    [    3.051356] usb 1-1.4: new full-speed USB device number 4 using ehci-platform
+    [    3.165201] hid-generic 0003:15BA:003B.0001: hiddev96,hidraw0: USB HID v1.11 Device [HID 15ba:003b] on usb-1c1b000.usb-1.4/input0
+    [    3.375448] mmc2: new DDR MMC card at address 0001
+    [    3.377066] mmcblk2: mmc2:0001 R1J56L 13.8 GiB
+    [    3.379723]  mmcblk2: p1 p2
+    [    3.381442] mmcblk2boot0: mmc2:0001 R1J56L 16.0 MiB
+    [    3.385069] mmcblk2boot1: mmc2:0001 R1J56L 16.0 MiB
+    [    3.499565] stage-1-init: [Wed Jan 10 22:18:06 UTC 2024] kbd_mode: KDSKBMODE: Inappropriate ioctl for device
+    [    3.518032] stage-1-init: [Wed Jan 10 22:18:06 UTC 2024] starting device mapper and LVM...
+    [    4.731324] random: crng init done
+    [    4.900937] stage-1-init: [Wed Jan 10 22:18:07 UTC 2024] checking /dev/disk/by-label/NIXOS_SD...
+    [    4.906899] stage-1-init: [Wed Jan 10 22:18:07 UTC 2024] fsck (busybox 1.36.1)
+    [    4.913346] stage-1-init: [Wed Jan 10 22:18:07 UTC 2024] [fsck.ext4 (1) -- /mnt-root/] fsck.ext4 -a /dev/disk/by-label/NIXOS_SD
+    [    4.932232] stage-1-init: [Wed Jan 10 22:18:07 UTC 2024] NIXOS_SD: clean, 1030417/7304000 files, 9442821/29896704 blocks
+    [    4.937512] stage-1-init: [Wed Jan 10 22:18:07 UTC 2024] mounting /dev/disk/by-label/NIXOS_SD on /...
+    [    4.951485] usb 1-1.4: USB disconnect, device number 4
+    [    4.961807] EXT4-fs (mmcblk0p2): mounted filesystem 44444444-4444-4444-8888-888888888888 r/w with ordered data mode. Quota mode: none.
+    [    4.967972] EXT4-fs (mmcblk0p2): re-mounted 44444444-4444-4444-8888-888888888888 r/w. Quota mode: none.
+    [    5.695374] usb 1-1.4: new full-speed USB device number 5 using ehci-platform
+    [    5.818841] input: Olimex Ltd. TERES Keyboard+Touchpad as /devices/platform/soc/1c1b000.usb/usb1/1-1/1-1.4/1-1.4:1.0/0003:15BA:003C.0002/input/input1
+    [    5.876182] hid-generic 0003:15BA:003C.0002: input,hidraw0: USB HID v1.11 Keyboard [Olimex Ltd. TERES Keyboard+Touchpad] on usb-1c1b000.usb-1.4/input0
+    [    5.884044] input: Olimex Ltd. TERES Keyboard+Touchpad as /devices/platform/soc/1c1b000.usb/usb1/1-1/1-1.4/1-1.4:1.1/0003:15BA:003C.0003/input/input2
+    [    5.884411] hid-generic 0003:15BA:003C.0003: input,hidraw1: USB HID v1.11 Mouse [Olimex Ltd. TERES Keyboard+Touchpad] on usb-1c1b000.usb-1.4/input1
+    [    5.930440] EXT4-fs (mmcblk0p2): re-mounted 44444444-4444-4444-8888-888888888888 r/w. Quota mode: none.
+    [    5.935809] booting system configuration /nix/store/sq3qfk3hsxpjcgnbvf7adx2vlzgppdjc-nixos-system-tsvetan-23.05.20230829.2ab91c8
+    [    6.173700] stage-2-init: running activation script...
+    [    7.493743] stage-2-init: setting up /etc...
+    [   10.638978] systemd[1]: systemd 253.6 running in system mode (+PAM +AUDIT -SELINUX +APPARMOR +IMA +SMACK +SECCOMP +GCRYPT -GNUTLS +OPENSSL +ACL +BLKID +CURL +ELFUTILS +FIDO2 +IDN2 -IDN +IPTC +KMOD +LIBCRYPTSETUP +LIBFDISK +PCRE2 -PWQUALITY +P11KIT -QRENCODE +TPM2 +BZIP2 +LZ4 +XZ +ZLIB +ZSTD +BPF_FRAMEWORK -XKBCOMMON +UTMP -SYSVINIT default-hierarchy=unified)
+    [   10.639019] systemd[1]: Detected architecture arm64.
+    [   11.081014] systemd[1]: bpf-lsm: Failed to load BPF object: No such process
+    [   12.357946] systemd[1]: /etc/systemd/system/cups.socket:5: ListenStream= references a path below legacy directory /var/run/, updating /var/run/cups/cups.sock → /run/cups/cups.sock; please update the unit file accordingly.
+    [   12.451020] systemd[1]: Queued start job for default target Graphical Interface.
+    [   12.478085] systemd[1]: Created slice Slice /system/getty.
+    [   12.498911] systemd[1]: Created slice Slice /system/modprobe.
+    [   12.519009] systemd[1]: Created slice Slice /system/serial-getty.
+    [   12.538609] systemd[1]: Created slice User and Session Slice.
+    [   12.556113] systemd[1]: Started Dispatch Password Requests to Console Directory Watch.
+    [   12.571869] systemd[1]: Started Forward Password Requests to Wall Directory Watch.
+    [   12.588541] systemd[1]: Set up automount Arbitrary Executable File Formats File System Automount Point.
+    [   12.603801] systemd[1]: Reached target Local Encrypted Volumes.
+    [   12.619597] systemd[1]: Reached target Containers.
+    [   12.631602] systemd[1]: Reached target Path Units.
+    [   12.643491] systemd[1]: Reached target Remote File Systems.
+    [   12.659487] systemd[1]: Reached target Slice Units.
+    [   12.679866] systemd[1]: Listening on Process Core Dump Socket.
+    [   12.696599] systemd[1]: Listening on Journal Socket (/dev/log).
+    [   12.712577] systemd[1]: Listening on Journal Socket.
+    [   12.724823] systemd[1]: Listening on Userspace Out-Of-Memory (OOM) Killer Socket.
+    [   12.741942] systemd[1]: Listening on udev Control Socket.
+    [   12.760420] systemd[1]: Listening on udev Kernel Socket.
+    [   12.799882] systemd[1]: Mounting Huge Pages File System...
+    [   12.819147] systemd[1]: Mounting POSIX Message Queue File System...
+    [   12.836261] systemd[1]: Kernel Debug File System was skipped because of an unmet condition check (ConditionPathExists=/sys/kernel/debug).
+    [   12.844223] systemd[1]: Starting Create List of Static Device Nodes...
+    [   12.880192] systemd[1]: Starting Load Kernel Module configfs...
+    [   12.899570] systemd[1]: Starting Load Kernel Module drm...
+    [   12.920124] systemd[1]: Starting Load Kernel Module efi_pstore...
+    [   12.944256] systemd[1]: Starting Load Kernel Module fuse...
+    [   12.963147] systemd[1]: Starting mount-pstore.service...
+    [   12.976093] systemd[1]: File System Check on Root Device was skipped because of an unmet condition check (ConditionPathIsReadWrite=!/).
+    [   12.987899] systemd[1]: Starting Journal Service...
+    [   13.010202] systemd[1]: Starting Load Kernel Modules...
+    [   13.012974] fuse: init (API version 7.38)
+    [   13.028975] systemd[1]: Starting Remount Root and Kernel File Systems...
+    [   13.053145] systemd[1]: Starting Coldplug All udev Devices...
+    [   13.089957] systemd[1]: Mounted Huge Pages File System.
+    [   13.096585] systemd-journald[459]: Collecting audit messages is disabled.
+    [   13.097713] systemd[1]: Mounted POSIX Message Queue File System.
+    [   13.117498] systemd[1]: Finished Create List of Static Device Nodes.
+    [   13.133358] bridge: filtering via arp/ip/ip6tables is no longer available by default. Update your scripts to load br_netfilter if you need this.
+    [   13.138054] systemd[1]: modprobe@configfs.service: Deactivated successfully.
+    [   13.139529] systemd[1]: Finished Load Kernel Module configfs.
+    [   13.157998] systemd[1]: modprobe@drm.service: Deactivated successfully.
+    [   13.159491] systemd[1]: Finished Load Kernel Module drm.
+    [   13.178414] systemd[1]: modprobe@efi_pstore.service: Deactivated successfully.
+    [   13.179984] systemd[1]: Finished Load Kernel Module efi_pstore.
+    [   13.196829] systemd[1]: Started Journal Service.
+    [   13.202070] EXT4-fs (mmcblk0p2): re-mounted 44444444-4444-4444-8888-888888888888 r/w. Quota mode: none.
+    [   13.446185] systemd-journald[459]: Received client request to flush runtime journal.
+    [   13.576994] systemd-journald[459]: /var/log/journal/059428de9ba34e0a94220984be5a6db9/system.journal: Monotonic clock jumped backwards relative to last journal entry, rotating.
+    [   13.577039] systemd-journald[459]: Rotating system journal.
+    [   15.557430] Adding 5242876k swap on /dev/mmcblk0p3.  Priority:-2 extents:1 across:5242876k SSFS
+    [   15.861729] mousedev: PS/2 mouse device common for all mice
+    [   17.633807] usbcore: registered new device driver onboard-usb-hub
+    [   17.640762] usb 1-1.3: USB disconnect, device number 3
+    [   17.641546] usb 1-1.4: USB disconnect, device number 5
+    [   17.641992] sun8i-ce 1c15000.crypto: Set mod clock to 300000000 (300 Mhz) from 24000000 (24 Mhz)
+    [   17.658410] sun8i-ce 1c15000.crypto: will run requests pump with realtime priority
+    [   17.663797] sun8i-ce 1c15000.crypto: will run requests pump with realtime priority
+    [   17.673518] sun8i-ce 1c15000.crypto: will run requests pump with realtime priority
+    [   17.677507] sun8i-ce 1c15000.crypto: will run requests pump with realtime priority
+    [   17.677730] sun8i-ce 1c15000.crypto: Register cbc(aes)
+    [   17.677780] sun8i-ce 1c15000.crypto: Register ecb(aes)
+    [   17.677793] sun8i-ce 1c15000.crypto: Register cbc(des3_ede)
+    [   17.677806] sun8i-ce 1c15000.crypto: Register ecb(des3_ede)
+    [   17.677845] sun8i-ce 1c15000.crypto: CryptoEngine Die ID 0
+    [   17.691602] sunxi-wdt 1c20ca0.watchdog: Watchdog enabled (timeout=16 sec, nowayout=0)
+    [   17.719957] mc: Linux media interface: v0.10
+    [   17.825456] videodev: Linux video capture interface: v2.00
+    [   17.882953] lima 1c40000.gpu: gp - mali400 version major 1 minor 1
+    [   17.883070] lima 1c40000.gpu: pp0 - mali400 version major 1 minor 1
+    [   17.883158] lima 1c40000.gpu: pp1 - mali400 version major 1 minor 1
+    [   17.883204] lima 1c40000.gpu: l2 cache 64K, 4-way, 64byte cache line, 64bit external bus
+    [   17.909514] lima 1c40000.gpu: bus rate = 200000000
+    [   17.909565] lima 1c40000.gpu: mod rate = 297000000
+    [   17.909700] lima 1c40000.gpu: error -ENODEV: _opp_set_regulators: no regulator (mali) found
+    [   17.926865] simple-amplifier audio-amplifier: supply VCC not found, using dummy regulator
+    [   17.934479] [drm] Initialized lima 1.1.0 20191231 for 1c40000.gpu on minor 0
+    [   17.947221] usbcore: registered new interface driver uvcvideo
+    [   17.980035] sun8i-rotate 1020000.rotate: Device registered as /dev/video0
+    [   17.984496] sun8i-di 1e00000.deinterlace: Device registered as /dev/video1
+    [   18.004436] input: axp20x-pek as /devices/platform/soc/1f03400.rsb/sunxi-rsb-3a3/axp221-pek/input/input3
+    [   18.007414] axp20x-battery-power-supply axp20x-battery-power-supply: DMA mask not set
+    [   18.011750] axp20x-ac-power-supply axp20x-ac-power-supply: DMA mask not set
+    [   18.028681] [drm] Found ANX6345 (ver. 170) eDP Transmitter
+    [   18.054775] axp20x-gpio axp20x-gpio: DMA mask not set
+    [   18.059484] pinctrl core: failed to create debugfs directory for axp20x-gpio
+    [   18.060102] axp20x-gpio axp20x-gpio: AXP209 pinctrl and GPIO driver loaded
+    [   18.065960] sun4i-drm display-engine: bound 1100000.mixer (ops sun8i_mixer_ops [sun8i_mixer])
+    [   18.067668] sun4i-drm display-engine: bound 1200000.mixer (ops sun8i_mixer_ops [sun8i_mixer])
+    [   18.114170] sun4i-drm display-engine: bound 1c0c000.lcd-controller (ops sun4i_tcon_ops [sun4i_tcon])
+    [   18.114775] sun4i-drm display-engine: bound 1c0d000.lcd-controller (ops sun4i_tcon_ops [sun4i_tcon])
+    [   18.129454] [drm] Initialized sun4i-drm 1.0.0 20150629 for display-engine on minor 1
+    [   18.142915] cfg80211: Loading compiled-in X.509 certificates for regulatory database
+    [   18.180941] axp20x-adc axp813-adc: DMA mask not set
+    [   18.214109] Loaded X.509 cert 'sforshee: 00b28ddf47aef9cea7'
+    [   18.247414] onboard-usb-hub 1-1: reset high-speed USB device number 2 using ehci-platform
+    [   18.274284] fbcon: Deferring console take-over
+    [   18.274318] sun4i-drm display-engine: [drm] fb0: sun4i-drmdrmfb frame buffer device
+    [   18.323184] r8723bs: module is from the staging directory, the quality is unknown, you have been warned.
+    [   18.332621] pnetdev = 00000000f59d3d90
+    [   18.426778] hub 1-1:1.0: USB hub found
+    [   18.430019] hub 1-1:1.0: 4 ports detected
+    [   18.435005] hub 1-1:1.0: USB hub found
+    [   18.435445] hub 1-1:1.0: 4 ports detected
+    [   18.723418] usb 1-1.3: new high-speed USB device number 6 using ehci-platform
+    [   19.028755] usb 1-1.3: Found UVC 1.00 device USB2.0 PC CAMERA (1908:2311)
+    [   19.297561] input: USB2.0 PC CAMERA: USB2.0 PC CAM as /devices/platform/soc/1c1b000.usb/usb1/1-1/1-1.3/1-1.3:1.0/input/input4
+    [   19.379402] usb 1-1.4: new full-speed USB device number 7 using ehci-platform
+    [   19.520268] input: Olimex Ltd. TERES Keyboard+Touchpad as /devices/platform/soc/1c1b000.usb/usb1/1-1/1-1.4/1-1.4:1.0/0003:15BA:003C.0004/input/input5
+    [   19.580597] hid-generic 0003:15BA:003C.0004: input,hidraw0: USB HID v1.11 Keyboard [Olimex Ltd. TERES Keyboard+Touchpad] on usb-1c1b000.usb-1.4/input0
+    [   19.584892] input: Olimex Ltd. TERES Keyboard+Touchpad as /devices/platform/soc/1c1b000.usb/usb1/1-1/1-1.4/1-1.4:1.1/0003:15BA:003C.0005/input/input6
+    [   19.585865] hid-generic 0003:15BA:003C.0005: input,hidraw1: USB HID v1.11 Mouse [Olimex Ltd. TERES Keyboard+Touchpad] on usb-1c1b000.usb-1.4/input1
+    [   19.942902] rtl8723bs: acquire FW from file:rtlwifi/rtl8723bs_nic.bin
+    [   23.710781] fbcon: Taking over console
+    [   23.715792] Console: switching to colour frame buffer device 170x48
+    [   24.045023] IPv6: ADDRCONF(NETDEV_CHANGE): wlan0: link becomes ready
+    [   31.006303] memfd_create() without MFD_EXEC nor MFD_NOEXEC_SEAL, pid=956 'systemd'
+    [   33.767694] dc1sw: disabling
+    [   33.767823] vcc-hdmi: disabling
+    [   33.767920] cpvdd: disabling
+    [   33.768070] vcc-1v2-hsic: disabling
+    [   46.371394] systemd-journald[459]: Time jumped backwards, rotating.
+
+
+    [22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_BLK_DEV_INITRD should be set (postmarketOS): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_BLK_DEV_INITRD
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_CGROUPS should be set (postmarketOS): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_CGROUPS
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_CRYPTO_AES should be set (postmarketOS): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_CRYPTO_AES
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_CRYPTO_XTS should be set (postmarketOS): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_CRYPTO_XTS
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_DEVTMPFS should be set (postmarketOS): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_DEVTMPFS
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_DM_CRYPT should be set (postmarketOS): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_DM_CRYPT
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_INPUT_EVDEV should be set (postmarketOS): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_INPUT_EVDEV
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_EXT4_FS should be set (postmarketOS): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_EXT4_FS
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_SYSVIPC should be set (postmarketOS): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_SYSVIPC
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_TMPFS_POSIX_ACL should be set (postmarketOS): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_TMPFS_POSIX_ACL
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_UEVENT_HELPER should be set (postmarketOS): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_UEVENT_HELPER
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_USER_NS should be set (postmarketOS): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_USER_NS
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_INPUT_UINPUT should be set (community): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_INPUT_UINPUT
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_LEDS_TRIGGER_TIMER should be set (community): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_LEDS_TRIGGER_TIMER
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_NETFILTER_XT_MATCH_TCPMSS should be set (community): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_NETFILTER_XT_MATCH_TCPMSS
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_NETFILTER_XT_TARGET_TCPMSS should be set (community): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_NETFILTER_XT_TARGET_TCPMSS
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_EFI_VARS_PSTORE should be set (uefi): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_EFI_VARS_PSTORE
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_NET_NS should be set (containers): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_NET_NS
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_IPC_NS should be set (containers): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_IPC_NS
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_CGROUPS should be set (containers): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_CGROUPS
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_CGROUP_CPUACCT should be set (containers): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_CGROUP_CPUACCT
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_CGROUP_DEVICE should be set (containers): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_CGROUP_DEVICE
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_CGROUP_FREEZER should be set (containers): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_CGROUP_FREEZER
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_CGROUP_SCHED should be set (containers): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_CGROUP_SCHED
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_CPUSETS should be set (containers): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_CPUSETS
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_KEYS should be set (containers): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_KEYS
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_VETH should be set (containers): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_VETH
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_BRIDGE should be set (containers): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_BRIDGE
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_BRIDGE_NETFILTER should be set (containers): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_BRIDGE_NETFILTER
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_IP_NF_FILTER should be set (containers): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_IP_NF_FILTER
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_IP_NF_TARGET_MASQUERADE should be set (containers): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_IP_NF_TARGET_MASQUERADE
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_NETFILTER_XT_MATCH_ADDRTYPE should be set (containers): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_NETFILTER_XT_MATCH_ADDRTYPE
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_NETFILTER_XT_MATCH_CONNTRACK should be set (containers): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_NETFILTER_XT_MATCH_CONNTRACK
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_NETFILTER_XT_MATCH_IPVS should be set (containers): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_NETFILTER_XT_MATCH_IPVS
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_NETFILTER_XT_MARK should be set (containers): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_NETFILTER_XT_MARK
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_NETFILTER_XT_TARGET_CHECKSUM should be set (containers): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_NETFILTER_XT_TARGET_CHECKSUM
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_IP_NF_NAT should be set (containers): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_IP_NF_NAT
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_NF_NAT should be set (containers): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_NF_NAT
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_POSIX_MQUEUE should be set (containers): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_POSIX_MQUEUE
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_BLK_DEV_DM should be set (containers): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_BLK_DEV_DM
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_DUMMY should be set (containers): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_DUMMY
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_BLK_CGROUP should be set (containers): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_BLK_CGROUP
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_BLK_DEV_THROTTLING should be set (containers): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_BLK_DEV_THROTTLING
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_CGROUP_PERF should be set (containers): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_CGROUP_PERF
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_NET_CLS_CGROUP should be set (containers): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_NET_CLS_CGROUP
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_FAIR_GROUP_SCHED should be set (containers): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_FAIR_GROUP_SCHED
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_RT_GROUP_SCHED should be set (containers): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_RT_GROUP_SCHED
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_IP_NF_TARGET_REDIRECT should be set (containers): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_IP_NF_TARGET_REDIRECT
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_IP_VS should be set (containers): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_IP_VS
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_IP_VS_NFCT should be set (containers): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_IP_VS_NFCT
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_IP_VS_PROTO_TCP should be set (containers): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_IP_VS_PROTO_TCP
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_IP_VS_PROTO_UDP should be set (containers): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_IP_VS_PROTO_UDP
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_IP_VS_RR should be set (containers): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_IP_VS_RR
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_EXT4_FS_POSIX_ACL should be set (containers): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_EXT4_FS_POSIX_ACL
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_EXT4_FS_SECURITY should be set (containers): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_EXT4_FS_SECURITY
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_CFS_BANDWIDTH should be set (containers): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_CFS_BANDWIDTH
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_CHECKPOINT_RESTORE should be set (containers): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_CHECKPOINT_RESTORE
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_MEMCG should be set (containers): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_MEMCG
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_DM_THIN_PROVISIONING should be set (containers): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_DM_THIN_PROVISIONING
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_VXLAN should be set (containers): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_VXLAN
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_IP6_NF_TARGET_MASQUERADE should be set (containers): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_IP6_NF_TARGET_MASQUERADE
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_BRIDGE_VLAN_FILTERING should be set (containers): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_BRIDGE_VLAN_FILTERING
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_MACVLAN should be set (containers): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_MACVLAN
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_CGROUP_NET_PRIO should be set (containers): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_CGROUP_NET_PRIO
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_OVERLAY_FS should be set (containers): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_OVERLAY_FS
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_IPVLAN should be set (containers): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_IPVLAN
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_CGROUP_PIDS should be set (containers): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_CGROUP_PIDS
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_BTRFS_FS should be set (filesystems): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_BTRFS_FS
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_EXFAT_FS should be set (filesystems): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_EXFAT_FS
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_EXT4_FS should be set (filesystems): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_EXT4_FS
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_F2FS_FS should be set (filesystems): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_F2FS_FS
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_ASYMMETRIC_KEY_TYPE should be set (iwd): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_ASYMMETRIC_KEY_TYPE
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_ASYMMETRIC_PUBLIC_KEY_SUBTYPE should be set (iwd): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_ASYMMETRIC_PUBLIC_KEY_SUBTYPE
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_CRYPTO_AES should be set (iwd): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_CRYPTO_AES
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_CRYPTO_CBC should be set (iwd): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_CRYPTO_CBC
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_CRYPTO_CMAC should be set (iwd): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_CRYPTO_CMAC
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_CRYPTO_DES should be set (iwd): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_CRYPTO_DES
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_CRYPTO_ECB should be set (iwd): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_CRYPTO_ECB
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_CRYPTO_HMAC should be set (iwd): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_CRYPTO_HMAC
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_CRYPTO_MD5 should be set (iwd): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_CRYPTO_MD5
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_CRYPTO_SHA1 should be set (iwd): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_CRYPTO_SHA1
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_CRYPTO_SHA256 should be set (iwd): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_CRYPTO_SHA256
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_CRYPTO_SHA512 should be set (iwd): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_CRYPTO_SHA512
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_CRYPTO_USER_API_HASH should be set (iwd): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_CRYPTO_USER_API_HASH
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_CRYPTO_USER_API_SKCIPHER should be set (iwd): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_CRYPTO_USER_API_SKCIPHER
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_KEYS should be set (iwd): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_KEYS
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_KEY_DH_OPERATIONS should be set (iwd): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_KEY_DH_OPERATIONS
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_PKCS7_MESSAGE_PARSER should be set (iwd): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_PKCS7_MESSAGE_PARSER
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_PKCS8_PRIVATE_KEY_PARSER should be set (iwd): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_PKCS8_PRIVATE_KEY_PARSER
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_X509_CERTIFICATE_PARSER should be set (iwd): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_X509_CERTIFICATE_PARSER
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_BLK_DEV_NBD should be set (netboot): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_BLK_DEV_NBD
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_NETFILTER should be set (nftables): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_NETFILTER
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_NF_CONNTRACK should be set (nftables): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_NF_CONNTRACK
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_NF_TABLES should be set (nftables): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_NF_TABLES
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_NF_TABLES_INET should be set (nftables): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_NF_TABLES_INET
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_NFT_CT should be set (nftables): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_NFT_CT
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_NFT_LOG should be set (nftables): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_NFT_LOG
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_NFT_LIMIT should be set (nftables): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_NFT_LIMIT
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_NFT_MASQ should be set (nftables): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_NFT_MASQ
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_NFT_NAT should be set (nftables): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_NFT_NAT
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_NFT_REJECT should be set (nftables): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_NFT_REJECT
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_NF_TABLES_IPV4 should be set (nftables): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_NF_TABLES_IPV4
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_NF_REJECT_IPV4 should be set (nftables): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_NF_REJECT_IPV4
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_IP_NF_IPTABLES should be set (nftables): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_IP_NF_IPTABLES
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_IP_NF_FILTER should be set (nftables): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_IP_NF_FILTER
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_IP_NF_TARGET_REJECT should be set (nftables): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_IP_NF_TARGET_REJECT
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_IP_NF_NAT should be set (nftables): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_IP_NF_NAT
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_NF_TABLES_IPV6 should be set (nftables): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_NF_TABLES_IPV6
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_NF_REJECT_IPV6 should be set (nftables): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_NF_REJECT_IPV6
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_IP6_NF_IPTABLES should be set (nftables): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_IP6_NF_IPTABLES
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_IP6_NF_FILTER should be set (nftables): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_IP6_NF_FILTER
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_IP6_NF_TARGET_REJECT should be set (nftables): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_IP6_NF_TARGET_REJECT
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_IP6_NF_NAT should be set (nftables): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_IP6_NF_NAT
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_USB_CONFIGFS_RNDIS should be set (usb_gadgets): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_USB_CONFIGFS_RNDIS
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_ANDROID_BINDER_DEVICES should contain "binder" (waydroid): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_ANDROID_BINDER_DEVICES
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_ANDROID_BINDER_IPC should be set (waydroid): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_ANDROID_BINDER_IPC
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_BLK_DEV_LOOP should be set (waydroid): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_BLK_DEV_LOOP
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_BPF_SYSCALL should be set (waydroid): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_BPF_SYSCALL
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_BRIDGE should be set (waydroid): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_BRIDGE
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_BRIDGE_VLAN_FILTERING should be set (waydroid): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_BRIDGE_VLAN_FILTERING
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_CGROUP_BPF should be set (waydroid): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_CGROUP_BPF
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_FUSE_FS should be set (waydroid): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_FUSE_FS
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_IP_NF_MANGLE should be set (waydroid): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_IP_NF_MANGLE
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_NETFILTER_XTABLES should be set (waydroid): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_NETFILTER_XTABLES
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_NETFILTER_XT_MATCH_COMMENT should be set (waydroid): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_NETFILTER_XT_MATCH_COMMENT
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_PSI should be set (waydroid): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_PSI
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_SQUASHFS should be set (waydroid): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_SQUASHFS
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_SQUASHFS_XATTR should be set (waydroid): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_SQUASHFS_XATTR
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_SQUASHFS_XZ should be set (waydroid): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_SQUASHFS_XZ
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_TMPFS_XATTR should be set (waydroid): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_TMPFS_XATTR
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_TUN should be set (waydroid): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_TUN
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_VETH should be set (waydroid): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_VETH
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_VLAN_8021Q should be set (waydroid): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_VLAN_8021Q
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_PSI should be set (waydroid): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_PSI
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_WIREGUARD should be set (wireguard): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_WIREGUARD
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_IP_ADVANCED_ROUTER should be set (wireguard): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_IP_ADVANCED_ROUTER
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_IP_MULTIPLE_TABLES should be set (wireguard): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_IP_MULTIPLE_TABLES
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_IPV6_MULTIPLE_TABLES should be set (wireguard): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_IPV6_MULTIPLE_TABLES
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_NF_TABLES should be set (wireguard): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_NF_TABLES
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_NF_TABLES_IPV4 should be set (wireguard): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_NF_TABLES_IPV4
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_NF_TABLES_IPV6 should be set (wireguard): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_NF_TABLES_IPV6
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_NFT_CT should be set (wireguard): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_NFT_CT
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_NFT_FIB should be set (wireguard): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_NFT_FIB
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_NFT_FIB_IPV4 should be set (wireguard): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_NFT_FIB_IPV4
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_NFT_FIB_IPV6 should be set (wireguard): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_NFT_FIB_IPV6
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_NF_CONNTRACK_MARK should be set (wireguard): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_NF_CONNTRACK_MARK
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_ZRAM should be set (zram): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_ZRAM
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_ZSMALLOC should be set (zram): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_ZSMALLOC
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_CRYPTO_LZ4 should be set (zram): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_CRYPTO_LZ4
+[22:26:18] WARNING: config-olimex-teres_i.aarch64: CONFIG_LZ4_COMPRESS should be set (zram): https://wiki.postmarketos.org/wiki/kconfig#CONFIG_LZ4_COMPRESS
+
+
+CONFIG_CRYPTO_XTS
+CONFIG_VT
+CONFIG_BINFMT_ELF
+CONFIG_BINFMT_SCRIPT
+CONFIG_NETFILTER_XT_TARGET_TCPMSS
+
+PKCS8_PRIVATE_KEY_PARSER
+CONFIG_KEY_DH_OPERATIONS
+CONFIG_CRYPTO_USER_API_SKCIPHER
+CONFIG_CRYPTO_SHA512
+CONFIG_CRYPTO_SHA1
+CONFIG_CRYPTO_HMAC
+CONFIG_CRYPTO_DES
+CONFIG_TMPFS_POSIX_ACL
+
+<apritzel> KREYREN_oftc: you can grep for the compatible string in the drivers/ directory, then check the Makefile in that directory for the file you find, which tells you the Kconfig option
+<apritzel> for instance: git grep allwinner,sun50i-a64-de2\" drivers/
+<apritzel> which gives you drivers/bus/sun50i-de2.c, so you check drivers/bus/Makefile for sun50i-de2.o, which gives you CONFIG_SUN50I_DE2_BUS
+<apritzel> rinse and repeat for other compatible strings you need, and don't forget trivial things like CONFIG_REGULATOR_FIXED_VOLTAGE
+<apritzel> or you just go with what the distributions produce, they put a lot of effort into getting this right

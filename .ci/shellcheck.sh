@@ -49,5 +49,5 @@ sh_files="
 for file in $sh_files; do
 	echo "Test with shellcheck: $file"
 	cd "$DIR/$(dirname "$file")"
-	shellcheck -e SC1008 -e SC3043 -x "$(basename "$file")"
+	shellcheck --shell=ash -e SC3043 -x "$(basename "$file")"
 done

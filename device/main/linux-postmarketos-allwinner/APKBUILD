@@ -1,7 +1,14 @@
 # Maintainer: Jan Jasper de Kroon <jajadekroon@gmail.com>
 # Co-Maintainer: Arnav Singh <me@arnavion.dev>
+# Contributor: Jacob Hrbek <kreyren@fsfe.org>
+
+# shellcheck disable=SC2154 # pre-defined variables
+: "$srcdir"
+
 _flavor=postmarketos-allwinner
 _config="config-$_flavor.$CARCH"
+pkgname="linux-$_flavor"
+pkgver="6.6.3_git20231128"
 pkgname=linux-$_flavor
 pkgver=6.7.2_git20240127
 pkgrel=0
@@ -58,8 +65,8 @@ esac
 prepare() {
 	default_prepare
 
-	REPLACE_GCCH=0 \
-		. downstreamkernel_prepare
+	# QA(Krey): Wtf is this?
+	REPLACE_GCCH=0 . downstreamkernel_prepare
 }
 
 build() {
