@@ -1,11 +1,14 @@
 # Maintainer: Jacob Hrbek <kreyren@fsfe.org>
-
-# Credit: Milan P. Stanić for maintaining the device on Alpine Linux including u-boot, arm-trusted-firmware, crust and finding a solution to broken display when compiled on alpine.
+# Contributor: Milan P. Stanić <mps@arvanta.net>
 
 # FIXME(Krey): Implement EFI
 
-# shellcheck disable=SC2154 # pre-defined values
+# FIXME(Krey): Get rid of these two prior to merge
+# shellcheck disable=SC2154 # pre-defined variables
 : "$srcdir" "$pkgdir" "$startdir"
+
+# shellcheck disable=SC2034 # builtin variables
+: "$pkgdesc" "$pkgname" "$pkgver" "$pkgrel" "$arch" "$url" "$license" "$depends" "$makedepends" "$source" "$options" "$sha512sums"
 
 pkgdesc="OLIMEX Teres-I"
 pkgname="device-olimex-teres_i"
@@ -14,19 +17,20 @@ pkgrel=0
 
 arch="aarch64"
 url="https://wiki.postmarketos.org/wiki/OLIMEX_Teres_i"
-license="EUPL"
+license="MIT"
 
-# FIXME(Krey): the rtl8723bs linux driver should be enough for wifi and BLE, figure out why that doesn't work without the `linux-firmware-rtlwifi`
+# FIXME(Krey): the rtl8723bs linux driver should be enough for wifi and BLE, figure out why that doesn't work without the `linux-firmware-rtlwifi` else move to nonfree firmware subpackage (https://gitlab.com/postmarketOS/pmaports/-/merge_requests/4743#note_1734077436)
+# FIXME(Krey): mesa-egl might not be needed
 depends="
 	linux-postmarketos-allwinner>=5.14
 	mesa-egl
 	postmarketos-base
 	linux-firmware-rtlwifi
-	u-boot-sunxi
+	u-boot-sunxi>=2024.01-2
 	"
 makedepends="devicepkg-dev"
 
-source="./deviceinfo"
+source="deviceinfo"
 
 options="!check" # We don't have any tests to run
 
@@ -39,5 +43,5 @@ package() {
 }
 
 sha512sums="
-15ef26ba5eb8eff9d81921b96778eec8870f41156f62caa296575e5c01ce2f18342bee410b370a12ca52ea9eb4ecded50dac30945f3e9bd3407135a3d458d43c  deviceinfo
+64ec120463f155a7f912e8ce09c344eaf9b231d195df488a6a6dae0f7cd5ea101c27e7ae45a0653018565194f55ea62ac769a4f75c9683f3a67937eb69a6102c  deviceinfo
 "

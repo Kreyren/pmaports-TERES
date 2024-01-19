@@ -7,6 +7,9 @@ deviceinfo_manufacturer="OLIMEX"
 deviceinfo_codename="olimex-teres_i"
 deviceinfo_year="2017"
 deviceinfo_arch="aarch64"
+
+# Kernel related
+## FIXME(Krey): Suspected to be caused by a bug in pmbootstrap, verify and remove if needs be (https://gitlab.com/postmarketOS/pmaports/-/merge_requests/4743#note_1734077470)
 deviceinfo_dtb="allwinner/sun50i-a64-teres-i"
 deviceinfo_append_dtb="true"
 
@@ -18,10 +21,12 @@ deviceinfo_external_storage="true"
 deviceinfo_screen_width="768"
 deviceinfo_screen_height="1366"
 deviceinfo_getty="ttyS0;115200"
+# Might not be needed -> expected to be removed in pmports contrib
 deviceinfo_mesa_driver="sun4i-drm"
 deviceinfo_external_storage="true"
 deviceinfo_dev_internal_storage="/dev/mmcblk2"
 deviceinfo_dev_internal_storage_repartition="true"
+# FIXME(Krey): Observe https://gitlab.com/postmarketOS/pmaports/-/merge_requests/4743#note_1734084014
 deviceinfo_swap_size_recommended="5120"
 
 # Bootloader related
@@ -34,6 +39,7 @@ deviceinfo_boot_part_start="16384"
 # EXTLINUX
 deviceinfo_generate_extlinux_config=true
 
+# NOTE(Krey): Do not include in pmports contrib
 # EFI
 # deviceinfo_generate_systemd_boot="true"
 # deviceinfo_boot_filesystem="fat32"
