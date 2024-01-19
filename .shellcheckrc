@@ -1,4 +1,4 @@
 shell=ash # Busybox ash only
-disable=SC2034 # The variables in APKBUILD are not sourcable as they are processed by the apk's runtime
+# disable=SC2034 # The variables in APKBUILD are not sourcable as they are processed by the apk's runtime
 disable=SC3043 # In POSIX `local` is undefined, but we are using busybox's ash
 disable=SC3060 # string replacement is not POSIX, but works in busybox's ash
