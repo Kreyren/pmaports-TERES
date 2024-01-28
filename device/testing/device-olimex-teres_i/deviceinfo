@@ -1,46 +1,38 @@
 # Reference: <https://postmarketos.org/deviceinfo>
 # Please use double quotes only. You can source this file in shell scripts.
 
+# shellcheck disable=SC2034 # These are sourced by pmbootstrap
+
 deviceinfo_format_version="0"
+
 deviceinfo_name="OLIMEX Teres-I"
 deviceinfo_manufacturer="OLIMEX"
 deviceinfo_codename="olimex-teres_i"
 deviceinfo_year="2017"
 deviceinfo_arch="aarch64"
 
-# Kernel related
-## FIXME(Krey): Suspected to be caused by a bug in pmbootstrap, verify and remove if needs be (https://gitlab.com/postmarketOS/pmaports/-/merge_requests/4743#note_1734077470)
-deviceinfo_dtb="allwinner/sun50i-a64-teres-i"
-deviceinfo_append_dtb="true"
-
 # Device related
 deviceinfo_gpu_accelerated="true"
 deviceinfo_chassis="laptop"
 deviceinfo_keyboard="true"
 deviceinfo_external_storage="true"
-deviceinfo_screen_width="768"
-deviceinfo_screen_height="1366"
 deviceinfo_getty="ttyS0;115200"
-# Might not be needed -> expected to be removed in pmports contrib
-deviceinfo_mesa_driver="sun4i-drm"
 deviceinfo_external_storage="true"
 deviceinfo_dev_internal_storage="/dev/mmcblk2"
 deviceinfo_dev_internal_storage_repartition="true"
 # FIXME(Krey): Observe https://gitlab.com/postmarketOS/pmaports/-/merge_requests/4743#note_1734084014
-deviceinfo_swap_size_recommended="5120"
+# deviceinfo_swap_size_recommended="5120"
 
 # Bootloader related
 deviceinfo_flash_method="none"
 deviceinfo_sd_embed_firmware_step_size="1024"
 deviceinfo_sd_embed_firmware="u-boot/teres_i/u-boot-sunxi-with-spl.bin:8"
-## 16383 (8KB)+1
-deviceinfo_boot_part_start="16384"
 
 # EXTLINUX
-deviceinfo_generate_extlinux_config=true
+#deviceinfo_generate_extlinux_config=true
 
 # NOTE(Krey): Do not include in pmports contrib
 # EFI
-# deviceinfo_generate_systemd_boot="true"
-# deviceinfo_boot_filesystem="fat32"
-# deviceinfo_partition_type="gpt"
+deviceinfo_generate_systemd_boot="true"
+deviceinfo_boot_filesystem="fat32"
+deviceinfo_partition_type="gpt"

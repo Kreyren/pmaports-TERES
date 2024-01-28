@@ -25,6 +25,9 @@
 		"terminal.integrated.env.linux": {
 			"EDITOR": "codium", // To open git things in codium
 		},
+		"files.associations": {
+			"deviceinfo": "shellscript"
+		},
 	},
 	"extensions": {
 		"recommendations": [

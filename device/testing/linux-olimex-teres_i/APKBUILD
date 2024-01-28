@@ -60,7 +60,6 @@ prepare() {
 		FB=y \
 		DRM_SIMPLEDRM=y \
 		SYSFB_SIMPLEFB=y \
-		DRM_PANFROST=y \
 		DRM_PANEL_EDP=y \
 		DRM_KOMEDA=y \
 		DRM_MALI_DISPLAY=y \

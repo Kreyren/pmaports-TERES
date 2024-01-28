@@ -1,17 +1,16 @@
+# Reference: <https://postmarketos.org/devicepkg>
 # Maintainer: Jacob Hrbek <kreyren@fsfe.org>
 # Contributor: Milan P. Stanić <mps@arvanta.net>
-
-# FIXME(Krey): Implement EFI
 
 # FIXME(Krey): Get rid of these two prior to merge
 # shellcheck disable=SC2154 # pre-defined variables
 : "$srcdir" "$pkgdir" "$startdir"
 
 # shellcheck disable=SC2034 # builtin variables
-: "$pkgdesc" "$pkgname" "$pkgver" "$pkgrel" "$arch" "$url" "$license" "$depends" "$makedepends" "$source" "$options" "$sha512sums"
+: "$pkgdesc" "$pkgname" "$pkgver" "$pkgrel" "$arch" "$url" "$license" "$depends" "$makedepends" "$source" "$options" "$sha512sums" "$subpackages"
 
 pkgdesc="OLIMEX Teres-I"
-pkgname="device-olimex-teres_i"
+pkgname=device-olimex-teres_i
 pkgver=1.0
 pkgrel=0
 
@@ -19,20 +18,22 @@ arch="aarch64"
 url="https://wiki.postmarketos.org/wiki/OLIMEX_Teres_i"
 license="MIT"
 
-# FIXME(Krey): the rtl8723bs linux driver should be enough for wifi and BLE, figure out why that doesn't work without the `linux-firmware-rtlwifi` else move to nonfree firmware subpackage (https://gitlab.com/postmarketOS/pmaports/-/merge_requests/4743#note_1734077436)
-# FIXME(Krey): mesa-egl might not be needed
-depends="
-	linux-postmarketos-allwinner>=5.14
-	mesa-egl
-	postmarketos-base
-	linux-firmware-rtlwifi
-	u-boot-sunxi>=2024.01-2
-	"
-makedepends="devicepkg-dev"
+options="!check" # We don't have any tests to run
 
 source="deviceinfo"
 
-options="!check" # We don't have any tests to run
+# FIXME(Krey): the rtl8723bs linux driver should be enough for wifi and BLE, figure out why that doesn't work without the `linux-firmware-rtlwifi` else move to nonfree firmware subpackage (https://gitlab.com/postmarketOS/pmaports/-/merge_requests/4743#note_1734077436)
+depends="
+	linux-postmarketos-allwinner>=5.14
+	$pkgname-nonfree-firmware
+	postmarketos-base
+	systemd-boot
+	"
+depends="$depends u-boot-sunxi>=2024.01-r3" # The previous versions were built with wrong configuration and cause the display to not function
+
+makedepends="devicepkg-dev"
+
+subpackages="$pkgname-nonfree-firmware:nonfree_firmware"
 
 build() {
 	devicepkg_build "$startdir" "$pkgname"
@@ -42,6 +43,15 @@ package() {
 	devicepkg_package "$startdir" $pkgname
 }
 
+nonfree_firmware() {
+	pkgdesc="RTLWIFI blob for RTL8723BS WiFi/BLE combo module"
+	depends="
+		linux-firmware-rtlwifi
+		linux-firmware-rtl_bt
+		"
+	mkdir "$subpkgdir"
+}
+
 sha512sums="
-64ec120463f155a7f912e8ce09c344eaf9b231d195df488a6a6dae0f7cd5ea101c27e7ae45a0653018565194f55ea62ac769a4f75c9683f3a67937eb69a6102c  deviceinfo
+209aa27dc567c6890c7000ac8a8da2a728ad34644be0f13f3f95f41daff78ce82e0ea33fdcfb1263624a29476720a5da3a6e19ac753192d8afba0c31c158b146  deviceinfo
 "
