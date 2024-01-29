@@ -24,12 +24,13 @@ source="deviceinfo"
 
 # FIXME(Krey): the rtl8723bs linux driver should be enough for wifi and BLE, figure out why that doesn't work without the `linux-firmware-rtlwifi` else move to nonfree firmware subpackage (https://gitlab.com/postmarketOS/pmaports/-/merge_requests/4743#note_1734077436)
 depends="
-	linux-postmarketos-allwinner>=5.14
 	$pkgname-nonfree-firmware
 	postmarketos-base
 	systemd-boot
 	"
 depends="$depends u-boot-sunxi>=2024.01-r3" # The previous versions were built with wrong configuration and cause the display to not function
+# depends="$depends linux-postmarketos-allwinner>=5.14" # AllWinner-specific kernel
+depends="$depends linux-olimex-teres_i>=5.14" # device-specific kernel
 
 makedepends="devicepkg-dev"
 

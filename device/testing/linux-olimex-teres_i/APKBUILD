@@ -34,6 +34,7 @@ prepare() {
 	# * WiFi
 	# * BLE
 	# * Battery charging and gauge
+	kernelAdd "LOCALVERSION=teres_i" # Set Local Version (suffix after kernel version)
 	kernelAdd "ARCH_SUNXI=y" # Sunxi
 	# FIXME(Krey): EMBEDDED should be set by ARCH_SUNXI
 	kernelAdd "EMBEDDED=y" # For Embedded
@@ -230,9 +231,10 @@ prepare() {
 	kernelAdd IKCONFIG_PROC=y \
 		IKCONFIG=y # Provide /proc/config.gz with kernel config
 	kernelAdd WERROR=y # Treat warnings as errors
-	kernelAdd LOCALVERSION=teres_i # Set Local Version (suffix after kernel version)
 	kernelAdd PREEMPT=y # Set low-latency desktop as preempt
+	# InitRD
 	kernelAdd BLK_DEV_INITRD=y # Support for initrd
+
 
 	# echo "CONFIG_XEN=y" >> .config # Xen support, wanted?
 	# echo "CONFIG_SUSPEND=y" >> .config # Enable suspend, needed?
