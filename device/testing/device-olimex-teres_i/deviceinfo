@@ -25,8 +25,8 @@ deviceinfo_dev_internal_storage_repartition="true"
 
 # Bootloader related
 deviceinfo_flash_method="none"
-deviceinfo_sd_embed_firmware_step_size="1024"
-deviceinfo_sd_embed_firmware="u-boot/teres_i/u-boot-sunxi-with-spl.bin:8"
+# deviceinfo_sd_embed_firmware_step_size="1024"
+# deviceinfo_sd_embed_firmware="u-boot/teres_i/u-boot-sunxi-with-spl.bin:8"
 
 # EXTLINUX
 #deviceinfo_generate_extlinux_config=true

@@ -24,15 +24,15 @@ source="deviceinfo"
 
 depends="$depends linux-lts>=6.1.74" # Aport's kernels below appears to not have the appropriate configuration for the device - https://gitlab.alpinelinux.org/alpine/aports/-/issues/15732
 
-depends="
+depends="$depends
 	postmarketos-base
 	systemd-boot
 	"
 
 # The previous versions were built with wrong configuration and cause the display to not function - https://gitlab.alpinelinux.org/alpine/aports/-/merge_requests/59249
-depends="$depends
-	u-boot-sunxi>=2024.01-r3
-	u-boot-tools"
+# depends="$depends
+# 	u-boot-sunxi>=2024.01-r3
+# 	u-boot-tools"
 
 makedepends="devicepkg-dev"
 
@@ -60,5 +60,5 @@ nonfree_firmware() {
 }
 
 sha512sums="
-209aa27dc567c6890c7000ac8a8da2a728ad34644be0f13f3f95f41daff78ce82e0ea33fdcfb1263624a29476720a5da3a6e19ac753192d8afba0c31c158b146  deviceinfo
+f051c59bc47c5883357ea83452a72a5062810c506b61b6deb44c4665176ae6c85ff7e4ab4c68386d8e68c40bd53c4d5639830565b8dcf122287b6f8be211d48e  deviceinfo
 "
