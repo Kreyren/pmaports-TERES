@@ -22,15 +22,17 @@ options="!check" # We don't have any tests to run
 
 source="deviceinfo"
 
-# FIXME(Krey): the rtl8723bs linux driver should be enough for wifi and BLE, figure out why that doesn't work without the `linux-firmware-rtlwifi` else move to nonfree firmware subpackage (https://gitlab.com/postmarketOS/pmaports/-/merge_requests/4743#note_1734077436)
+depends="$depends linux-lts>=6.1.74" # Aport's kernels below appears to not have the appropriate configuration for the device - https://gitlab.alpinelinux.org/alpine/aports/-/issues/15732
+
 depends="
-	$pkgname-nonfree-firmware
 	postmarketos-base
 	systemd-boot
 	"
-depends="$depends u-boot-sunxi>=2024.01-r3" # The previous versions were built with wrong configuration and cause the display to not function
-# depends="$depends linux-postmarketos-allwinner>=5.14" # AllWinner-specific kernel
-depends="$depends linux-olimex-teres_i>=5.14" # device-specific kernel
+
+# The previous versions were built with wrong configuration and cause the display to not function - https://gitlab.alpinelinux.org/alpine/aports/-/merge_requests/59249
+depends="$depends
+	u-boot-sunxi>=2024.01-r3
+	u-boot-tools"
 
 makedepends="devicepkg-dev"
 
@@ -44,8 +46,12 @@ package() {
 	devicepkg_package "$startdir" $pkgname
 }
 
+# FIXME(Krey): the rtl8723bs linux driver should be enough for wifi and BLE, figure out why that doesn't work without the `linux-firmware-rtlwifi` else move to nonfree firmware subpackage (https://gitlab.com/postmarketOS/pmaports/-/merge_requests/4743#note_1734077436)
+depends="$depends $pkgname-nonfree-firmware"
+
 nonfree_firmware() {
 	pkgdesc="RTLWIFI blob for RTL8723BS WiFi/BLE combo module"
+	arch="noarch"
 	depends="
 		linux-firmware-rtlwifi
 		linux-firmware-rtl_bt

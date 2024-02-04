@@ -65,6 +65,7 @@
 						inputs.nixpkgs.legacyPackages.${system}.nixpkgs-fmt # Nixpkgs formatter
 						inputs.nixpkgs.legacyPackages.${system}.git # Working with the codebase
 						inputs.nixpkgs.legacyPackages.${system}.shellcheck # Linting shell scripts
+						inputs.nixpkgs.legacyPackages.${system}.picocom # Testing the devices via serial console
 						inputs.nixpkgs-unstable.legacyPackages.${system}.pmbootstrap # Managing the codebase
 					];
 					inputsFrom = [ config.mission-control.devShell ];
